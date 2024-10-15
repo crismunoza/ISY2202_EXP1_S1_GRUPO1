@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home - Recetas Populares</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/home">Recetas Populares</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" th:each="receta, iterStat : ${recetas}" th:classappend="${iterStat.index == 0} ? 'active' : ''">
+                <img th:src="@{/img/{imagenUrl}(imagenUrl=${receta.imagenUrl})}" class="d-block w-100" th:alt="${receta.titulo}">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 th:text="${receta.titulo}"></h5>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#recipeCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#recipeCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    
+    <!-- Tarjetas de recetas -->
+    <div class="container mt-5">
+        <h2 class="text-center">Recetas Populares</h2>
+        <div class="row">
+            <div th:each="receta : ${recetas}" class="col-md-4 d-flex align-items-stretch">
+                <div class="card">
+                    <img th:src="@{/img/{imagenUrl}(imagenUrl=${receta.imagenUrl})}" class="card-img-top img-fluid" style="height: 250px; object-fit: cover;" th:alt="${receta.titulo}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" th:text="${receta.titulo}"></h5>
+                        <p class="card-text" th:text="${#strings.substring(receta.descripcion, 0, 100)} + '...'"></p>
+                        <p class="card-text" th:text="'Tiempo de preparación: ' + ${receta.tiempoPreparacion}"></p>
+                        <a th:href="@{/recetas/{id}(id=${receta.id})}" class="btn btn-primary">Ver Detalle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

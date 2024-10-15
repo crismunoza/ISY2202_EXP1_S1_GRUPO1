@@ -1,0 +1,6 @@
+# Convertir todos los archivos de texto a LF
+* text=auto
+
+# Forzar finales de línea LF en archivos .java y .html
+*.java text eol=lf
+*.html text eol=lf
