@@ -1,0 +1,23 @@
+/* Aseguramos que el body ocupe toda la altura de la pantalla */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hacemos que el contenedor principal ocupe todo el espacio disponible */
+.container {
+  flex: 1;
+}
+
+/* Configuramos el contenedor general para el footer sticky */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Forzamos el footer a estar al fondo */
+footer {
+  margin-top: auto;
+}

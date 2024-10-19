@@ -5,10 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - Recetas Populares</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Aseguramos que el body ocupe toda la altura de la pantalla */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Hacemos que el contenedor principal ocupe todo el espacio disponible */
+        #login-section {
+            flex: 1;
+        }
+
+        /* Configuramos el contenedor general para el footer sticky */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Forzamos el footer a estar al fondo */
+        footer {
+            margin-top: auto;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container">
+    <!-- Sección de navegación -->
+    <section id="nav-section">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" href="/home">Recetas Populares</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-5">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" href="/home">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <!-- Sección de login -->
+    <section id="login-section" class="container mt-5">
         <div class="row justify-content-center mt-5">
             <div class="col-md-4">
                 <div class="card">
@@ -29,19 +74,49 @@
                             </div>
                             <div th:if="${param.error}" class="alert alert-danger">Usuario o contraseña incorrectos.</div>
                             <div th:if="${param.logout}" class="alert alert-success">Sesión cerrada exitosamente.</div>
-                            <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                            <button type="submit" class="btn btn-secondary w-100">Iniciar Sesión</button>
                         </form>
-
-                         <div class="mt-3 text-center">
-
-                            <a href="/home" class="btn btn-secondary w-100">Volver al Home</a>
-                            
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Sección de pie de página -->
+    <section id="footer-section">
+        <footer class="bg-dark text-white pt-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Sobre Nosotros</h5>
+                        <p>En nuestra página, compartimos las mejores recetas para que disfrutes cocinando en casa.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Enlaces Útiles</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white">Inicio</a></li>
+                            <li><a href="#" class="text-white">Recetas Populares</a></li>
+                            <li><a href="#" class="text-white">Contáctanos</a></li>
+                            <li><a href="#" class="text-white">Política de Privacidad</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Síguenos</h5>
+                        <ul class="list-unstyled d-flex">
+                            <li class="ms-3"><a href="#" class="text-white"><i class="fab fa-facebook fa-2x"></i></a></li>
+                            <li class="ms-3"><a href="#" class="text-white"><i class="fab fa-instagram fa-2x"></i></a></li>
+                            <li class="ms-3"><a href="#" class="text-white"><i class="fab fa-twitter fa-2x"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col text-center">
+                        <p class="mb-0">&copy; 2024 Recetas Populares. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -60,7 +135,6 @@
                         username.classList.remove('is-valid', 'is-invalid');
                         password.classList.remove('is-valid', 'is-invalid');
 
-
                         if (!form.checkValidity()) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -77,9 +151,7 @@
                                 password.classList.add('is-valid');
                             }
                         } else {
-
                             event.preventDefault();
-
                             form.submit();
                         }
                     }, false)
