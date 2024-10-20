@@ -6,32 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login - Recetas Populares</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        /* Aseguramos que el body ocupe toda la altura de la pantalla */
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Hacemos que el contenedor principal ocupe todo el espacio disponible */
-        #login-section {
-            flex: 1;
-        }
-
-        /* Configuramos el contenedor general para el footer sticky */
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Forzamos el footer a estar al fondo */
-        footer {
-            margin-top: auto;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">   
 </head>
 
 <body>
@@ -56,8 +31,8 @@
     </section>
 
     <!-- Sección de login -->
-    <section id="login-section" class="container mt-5">
-        <div class="row justify-content-center mt-5">
+    <section id="login-section" class="container-fluid mt-5">
+        <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header text-center">
@@ -66,14 +41,14 @@
                     <div class="card-body">
                         <form id="loginForm" th:action="@{/login}" method="post" novalidate>
                             <div class="mb-3">
-                                <label for="username" class="form-label">Nombre de Usuario</label>
+                                <label for="username" class="form-label d-flex justify-content-center">Nombre de Usuario</label>
                                 <input type="text" class="form-control" id="username" name="username" required />
                                 <div class="invalid-feedback">
                                     Por favor, introduce un nombre de usuario válido.
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Contraseña</label>
+                                <label for="password" class="form-label d-flex justify-content-center">Contraseña</label>
                                 <input type="password" class="form-control" id="password" name="password" />
                                 <div class="invalid-feedback">
                                     Por favor, introduce una contraseña válida.
@@ -85,7 +60,7 @@
                             <div th:if="${param.logout}" class="alert alert-success">
                                 Sesión cerrada exitosamente.
                             </div>
-                            <button type="submit" class="btn btn-secondary w-100">
+                            <button id="boton-sesion" type="submit" class="btn btn-secondary">
                                 Iniciar Sesión
                             </button>
                         </form>
@@ -94,7 +69,8 @@
             </div>
         </div>
     </section>
-
+    
+    
     <!-- Sección de pie de página -->
     <section id="footer-section">
         <footer class="bg-dark text-white pt-4">
