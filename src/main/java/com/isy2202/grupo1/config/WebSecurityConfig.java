@@ -18,8 +18,8 @@ public class WebSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder().encode("password")) // Se encripta la contraseña
+                .username("admin")
+                .password(passwordEncoder().encode("admin")) 
                 .roles("USER")
                 .build();
 
@@ -28,22 +28,32 @@ public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();  // BCrypt es el encoder
+        return new BCryptPasswordEncoder();  
     }
 
     @Bean
     public org.springframework.security.web.SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/home","/recetas/**" ,"/login", "/css/**", "/js/**","/img/**").permitAll() // Usamos requestMatchers en lugar de antMatchers
-                .anyRequest().authenticated() // Proteger todas las demás rutas
+                .requestMatchers("/", "/home", "/login", "/css/**", "/js/**", "/img/**").permitAll()
+                .requestMatchers("/recetas/**").authenticated() 
             )
             .formLogin((form) -> form
                 .loginPage("/login")
+                .defaultSuccessUrl("/home", true) 
                 .permitAll()
             )
-            .logout().permitAll();
-
+            .logout((logout) -> logout
+                .logoutUrl("/logout") 
+                .logoutSuccessUrl("/home") 
+                .permitAll() 
+                .invalidateHttpSession(true) 
+                .clearAuthentication(true) 
+            );
+    
         return http.build();
     }
+    
+    
 }
+

@@ -17,6 +17,11 @@ public class HomeController {
     @Autowired
     private RecetaService recetaService;
 
+    @GetMapping("/")
+    public String redirectToHome() {
+        return "redirect:/home"; // Redirigir a la página de inicio
+    }
+
     @GetMapping("/home")
     public String home(Model model) throws ExecutionException, InterruptedException {
         List<Receta> recetas = recetaService.obtenerRecetas();
@@ -26,9 +31,8 @@ public class HomeController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "login"; // Cargar la página de login
     }
-
 
     @GetMapping("/recetas/{id}")
     public String detalleReceta(@PathVariable("id") String id, Model model) {
@@ -44,6 +48,6 @@ public class HomeController {
 
     @GetMapping("/access-denied")
     public String accessDenied() {
-        return "access-denied";
+        return "access-denied"; // Cargar la página de acceso denegado
     }
 }
